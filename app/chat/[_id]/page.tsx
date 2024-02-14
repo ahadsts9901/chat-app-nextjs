@@ -3,6 +3,8 @@
 import ChatLeft from "@/app/components/ChatLeft";
 import ChatNav from "@/app/components/ChatNav";
 import ChatRight from "@/app/components/ChatRight";
+import { pusherClient } from "@/app/lib/pusher";
+import { toPusherKey } from "@/app/lib/utils";
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
 import { IoMdSend } from "react-icons/io";
@@ -15,6 +17,7 @@ const User = (props: any) => {
     const [user, setUser]: any = useState(null)
     const [isLoading, setIsLoading]: any = useState(false)
     const [messages, setMessages]: any = useState([])
+    const [toggleMessage, setToggleMessage] = useState(false)
 
     const inputRef: any = useRef()
 
@@ -42,7 +45,6 @@ const User = (props: any) => {
         try {
             setIsLoading(true)
             const resp = await axios.get(`/api/message?id=${id}`, { withCredentials: true })
-            console.log(resp);
             setMessages(resp.data.messages)
             setIsLoading(false)
         } catch (error) {
@@ -59,10 +61,6 @@ const User = (props: any) => {
             return
         }
 
-        console.log(currentUser);
-
-
-
         try {
 
             const resp = await axios.post("/api/message",
@@ -74,6 +72,7 @@ const User = (props: any) => {
                 { withCredentials: true })
 
             getMessages(user?._id)
+            setToggleMessage(!toggleMessage)
             e.target.reset()
 
 
@@ -84,6 +83,29 @@ const User = (props: any) => {
         }
 
     }
+
+    useEffect(() => {
+
+        console.log("run ui")
+
+        pusherClient.subscribe(
+            toPusherKey(`user:${currentUser?._id}:message`)
+        )
+
+        const messageHandler = () => {
+            console.log("new message:")
+        }
+
+        pusherClient.bind(`message`, messageHandler)
+
+        return () => {
+            pusherClient.unsubscribe(
+                toPusherKey(`user:${currentUser?._id}:message`)
+            )
+            pusherClient.unbind(`message`, messageHandler)
+        }
+
+    }, [currentUser])
 
     return (
         <div className="w-full sm:w-[600px] m-auto pb-[4rem]">

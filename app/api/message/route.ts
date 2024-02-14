@@ -3,6 +3,8 @@ import "../mongodb";
 import { NextRequest, NextResponse } from 'next/server';
 import { chatModel } from "../schema";
 import { getUserData } from "../functions";
+import { pusherServer } from "@/app/lib/pusher";
+import { toPusherKey } from "@/app/lib/utils";
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
 
@@ -39,6 +41,20 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
             from_id: from_id,
             to_id: to_id,
         })
+
+        try {
+            pusherServer.trigger(
+                toPusherKey(`user:${to_id}:message`), `message`,
+                {
+                    senderId: from_id
+                }
+            )
+            console.log("pushed");
+
+        } catch (error) {
+            console.log(error);
+
+        }
 
         return NextResponse.json({
             message: "Message sent",

@@ -1,9 +1,11 @@
 import React from 'react'
 import Link from "next/link"
+import { profilePicture } from '../core'
 
 const User = (props: any) => {
     return (
-        <Link href={`/chat/${props?._id}`} className='w-full border-b bg-[#fcfcfc] flex justify-between items-center cursor-pointer p-4'>
+        <Link href={`/chat/${props?._id}`} className='w-full border-b bg-[#fcfcfc] flex items-center gap-4 cursor-pointer p-4'>
+            <img src={profilePicture} alt="image" className='w-12 h-12 rounded-full object-cover' />
             <p className='w-full font-extrabold'>{`${props?.firstName} ${props?.lastName}`}</p>
         </Link>
     )

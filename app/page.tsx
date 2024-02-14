@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import axios from "axios"
 import User from "./components/User";
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Home() {
 
-  const [isLoading, setIsLoading] = useState(false)
+  const currentUser = useSelector((state: any) => state.user)
+
   const [users, setUsers]: any = useState(null)
 
   useEffect(() => {
@@ -16,20 +18,17 @@ export default function Home() {
 
   const fetchUsers = async () => {
     try {
-      setIsLoading(true)
       const resp = await axios.get("/api/users", { withCredentials: true })
       setUsers(resp.data.data)
-      setIsLoading(false)
     } catch (error) {
       console.log(error);
-      setIsLoading(false)
     }
   }
 
   return (
     <>
       <Navbar />
-      <div className="flex flex-col border-x w-full sm:w-[600px] mx-auto h-full">
+      <div className="flex flex-col w-full sm:w-[600px] mx-auto h-full">
         {
           users ?
             users.map((user: any, index: number) => (

@@ -8,9 +8,6 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
 
         const users = await userModel.find().sort({ _id: -1 }).exec()
 
-        console.log(users);
-
-
         return NextResponse.json({
             message: "success",
             data: users

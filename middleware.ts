@@ -25,5 +25,6 @@ export const config = {
         '/',
         '/auth/login',
         '/auth/signup',
+        '/chat/[_id]',
     ],
 }

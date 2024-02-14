@@ -62,13 +62,14 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
             password: passwordHash,
         });
 
+
         const response = NextResponse.json({
             message: "Signup successfull",
             data: {
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
-                _id: signupResponse.insertedId,
+                _id: signupResponse._id,
             }
         });
 
@@ -77,7 +78,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
             firstName: firstName,
             lastName: lastName,
             email: email,
-            _id: signupResponse.insertedId,
+            _id: signupResponse._id,
         }, process.env.JWT_SECRET!, {
             expiresIn: extendedSessionInDays * 24 * 60 * 60 * 1000,
         });
@@ -86,7 +87,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
             firstName: firstName,
             lastName: lastName,
             email: email,
-            _id: signupResponse.insertedId,
+            _id: signupResponse._id,
         }, process.env.JWT_SECRET!, {
             expiresIn: initialSessionInDays * 24 * 60 * 60 * 1000,
         });

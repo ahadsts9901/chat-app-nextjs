@@ -58,3 +58,35 @@ try {
 }
 
 export { userModel };
+
+// chat schema
+
+let chatSchema = new mongoose.Schema({
+    message: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    from_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+    },
+    to_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+    },
+    createdOn: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+let chatModel: any;
+
+try {
+    chatModel = mongoose.model('chats');
+} catch (error) {
+    chatModel = mongoose.model('chats', chatSchema);
+}
+
+export { chatModel };

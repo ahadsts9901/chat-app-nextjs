@@ -32,7 +32,10 @@ export default function Home() {
         {
           users ?
             users.map((user: any, index: number) => (
-              <User key={index} firstName={user?.firstName} lastName={user?.lastName} _id={user?._id} />
+              <User key={index}
+                firstName={user?.firstName} lastName={user?.lastName}
+                isMe={currentUser?._id === user?._id}
+                _id={user?._id} />
             ))
             : <div className="w-full h-full flex justify-center items-center mt-[12rem]">
               <span className="load"></span>

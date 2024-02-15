@@ -2,14 +2,15 @@ import "../mongodb";
 import { NextRequest, NextResponse } from 'next/server';
 import "dotenv/config";
 import { userModel } from "../schema";
+import { getUserData } from "../functions";
 
 export const GET = async (req: NextRequest, res: NextResponse) => {
 
     try {
 
-        const id = new URL(req.url).searchParams.get("id");
+        const currentUser: any = await getUserData(req)
 
-        const userData = await userModel.findById(id).exec();
+        const userData = await userModel.findOne({ email: currentUser?.email });
 
         if (!userData) {
             return NextResponse.json({

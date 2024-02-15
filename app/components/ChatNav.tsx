@@ -4,7 +4,8 @@ import Link from 'next/link'
 import { IoChevronBackOutline } from "react-icons/io5";
 import Image from 'next/image';
 
-const Navbar = (props: any) => {
+const ChatNav = (props: any) => {
+
     return (
         <div className='w-full bg-[#fcfcfc] p-2 sticky top-0 z-50 border-b shadow-sm flex items-center gap-2'>
             <Link href="/"><IoChevronBackOutline className='w-[1.5rem] h-[1.5rem]' /></Link>
@@ -24,4 +25,4 @@ const Navbar = (props: any) => {
     )
 }
 
-export default Navbar
+export default ChatNav

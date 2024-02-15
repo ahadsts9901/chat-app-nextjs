@@ -86,14 +86,14 @@ const User = (props: any) => {
 
     useEffect(() => {
 
-        // console.log("run ui")
+        console.log("run ui")
 
         pusherClient.subscribe(
             toPusherKey(`user:${currentUser?._id}:message`)
         )
 
         const messageHandler = () => {
-            // console.log("new message:")
+            console.log("new message:")
             getMessages(user?._id)
         }
 

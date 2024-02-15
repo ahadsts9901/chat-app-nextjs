@@ -28,7 +28,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col w-full sm:w-[600px] mx-auto h-full">
+      <div className="flex flex-col w-full sm:w-[600px] mx-auto h-full text-slate-800">
         {
           users ?
             users.map((user: any, index: number) => (

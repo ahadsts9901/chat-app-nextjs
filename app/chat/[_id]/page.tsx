@@ -111,7 +111,7 @@ const User = (props: any) => {
     return (
         <div className="w-full sm:w-[600px] m-auto pb-[4rem]">
             <ChatNav firstName={user?.firstName} lastName={user?.lastName} isMe={currentUser?._id === user?._id} _id={user?._id} />
-            <div className="flex flex-col-reverse gap-4 p-4 bg-[#fefefe]">
+            <div className="flex flex-col-reverse gap-4 p-4 bg-[#fefefe] text-slate-800">
                 {
                     isLoading && <div className="w-full h-full flex justify-center items-center mt-[12rem]"><span className="load"></span></div>
                 }

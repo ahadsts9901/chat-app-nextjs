@@ -49,7 +49,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
                     senderId: from_id
                 }
             )
-            console.log("pushed");
 
         } catch (error) {
             console.log(error);

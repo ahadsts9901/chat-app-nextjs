@@ -33,6 +33,15 @@ const Profile = ({ params }: any) => {
             })
     }
 
+    const logout = async () => {
+        axios.post(`/api/auth/logout`, { withCredentials: true })
+            .then((res) => {
+                router.push("/auth/login")
+            }).catch((err) => {
+                console.log(err);
+            })
+    }
+
     return (
         <div className="w-full h-[100vh] sm:w-[600px] mx-auto border-x flex flex-col gap-4 p-4">
             <IoChevronBackOutline className="w-[1.5rem] h-[1.5rem] cursor-pointer" onClick={() => router.back()} />
@@ -62,11 +71,13 @@ const Profile = ({ params }: any) => {
                         <h3 className="w-full text-left pl-4 text-lg">
                             {`${profile?.email ? profile?.email : ""}`}
                         </h3>
-                        <button className="ml-4 mt-4 w-[200px] font-bold text-white bg-zinc-900 p-2 rounded-lg">Log out</button>
+                        <button className="ml-4 mt-4 w-[200px] font-bold text-white bg-zinc-900 p-2 rounded-lg"
+                            onClick={logout}
+                        >Log out</button>
                     </> :
-                    <Link href={`/chat/${profile?._id}`} className="cursor-pointer ml-4 mt-4 w-[200px] font-bold text-white bg-zinc-900 p-2 rounded-lg flex items-center">
+                    (currentUser && <Link href={`/chat/${profile?._id}`} className="cursor-pointer ml-4 mt-4 w-[200px] font-bold text-white bg-zinc-900 p-2 rounded-lg flex items-center">
                         <IoIosChatboxes className="w-[1.2rem] h-[1.2rem] ml-[55px] mr-2" />Chat
-                    </Link>
+                    </Link>)
             }
         </div>
     )

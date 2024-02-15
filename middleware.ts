@@ -6,7 +6,8 @@ export function middleware(request: NextRequest) {
 
     const isPublicPath =
         path === "/auth/login" ||
-        path === "/auth/signup"
+        path === "/auth/signup" ||
+        path === "/profile/:_id"
 
     const hart = request.cookies.get("hart")?.value || '';
 
@@ -25,6 +26,7 @@ export const config = {
         '/',
         '/auth/login',
         '/auth/signup',
-        '/chat/[_id]',
+        '/chat/:_id',
+        '/profile/:_id',
     ],
 }

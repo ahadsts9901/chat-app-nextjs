@@ -106,7 +106,7 @@ const User = (props: any) => {
             pusherClient.unbind(`message`, messageHandler)
         }
 
-    }, [currentUser])
+    }, [currentUser, user?._id])
 
     return (
         <div className="w-full sm:w-[600px] m-auto pb-[4rem]">

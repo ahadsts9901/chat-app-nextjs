@@ -77,7 +77,7 @@ const Login = () => {
                         passwordField1 ? <IoIosEyeOff className='cursor-pointer' onClick={() => setPasswordField1(!passwordField1)} /> : <IoIosEye className='cursor-pointer' onClick={() => setPasswordField1(!passwordField1)} />
                     }
                 </div>
-                <Link href="/auth/signup" className='text-[0.8rem] mt-2 pr-2 w-full text-right'>Don't have an account? Signup</Link>
+                <Link href="/auth/signup" className='text-[0.8rem] mt-2 pr-2 w-full text-right'>Dont have an account? Signup</Link>
                 <p className='w-full text-center text-sm font-bold text-red-500 capitalize'>{instructions}</p>
                 <p className='w-full text-center text-sm font-bold text-green-600 capitalize'>{success}</p>
                 <button className={`w-full font-bold text-white ${isLoading ? "bg-zinc-500" : "bg-zinc-900"} p-2 rounded-lg ${isLoading ? "pointer-events-none" : "pointer-events-auto"}`}>

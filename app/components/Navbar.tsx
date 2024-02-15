@@ -15,7 +15,9 @@ const Navbar = () => {
                 <TbBrandNextjs className='w-[2rem] h-[2rem]' />
                 <p>ext Chat</p>
             </Link>
-            <Image src={profilePicture} width={48} height={48} alt="image" className='w-12 h-12 rounded-full object-cover' />
+            <Link href={`/profile/${currentUser?._id}`}>
+                <Image src={profilePicture} width={48} height={48} alt="image" className='w-12 h-12 rounded-full object-cover cursor-pointer' />
+            </Link>
         </div>
     )
 }

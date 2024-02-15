@@ -61,13 +61,6 @@ const User = (props: any) => {
             return
         }
 
-        console.log({
-            message: inputRef.current.value,
-            to_id: user?._id,
-            from_id: currentUser._id
-        });
-
-
         try {
 
             const resp = await axios.post("/api/message",
